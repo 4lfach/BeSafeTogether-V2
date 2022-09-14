@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BeSafeTogether</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ai_help">AI Help</string>
+    <string name="profile">profile</string>
+    <string name="go_back">Go Back</string>
+    <string name="main_button">Main Button</string>
+    <string name="enter_your_stop_word">Enter your stop word</string>
+</resources>

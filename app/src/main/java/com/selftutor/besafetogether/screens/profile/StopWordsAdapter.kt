@@ -1,0 +1,51 @@
+package com.selftutor.besafetogether.screens.profile
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.selftutor.besafetogether.databinding.StopWordItemBinding
+import com.selftutor.besafetogether.model.database.stopwords.StopWord
+
+
+//todo Implement DiffUtils for better performance
+class StopWordsAdapter(
+	private val stopWordsActionListener: StopWordsActionListener
+) : RecyclerView.Adapter<StopWordsAdapter.ViewHolder>(){
+
+	var stopWords : List<StopWord> = emptyList()
+		set(value){
+			field = value
+			notifyDataSetChanged()
+		}
+
+	class ViewHolder(val binding: StopWordItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+		val inflater =LayoutInflater.from(parent.context)
+		val binding = StopWordItemBinding.inflate(inflater, parent, false)
+
+		return ViewHolder(binding)
+	}
+
+	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+		with(holder.binding){
+			val stopWord = stopWords[position]
+			wordTextView.text = stopWord.word
+
+			deleteImageView.setOnClickListener{
+				stopWordsActionListener.onUserDelete(stopWord)
+			}
+		}
+	}
+
+	override fun getItemCount(): Int = stopWords.size
+}
+
+interface StopWordsActionListener {
+	// creating a method for click
+	// action on delete image view.
+	fun onUserDelete(stopWord: StopWord)
+
+	fun onUserAdd(stopWord: StopWord)
+}

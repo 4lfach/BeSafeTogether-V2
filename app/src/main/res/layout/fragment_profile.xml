@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.profile.ProfileFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profileCard"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/violet"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/stopWordsCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imageCard"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/profileCard"
+        app:layout_constraintLeft_toLeftOf="@+id/profileCard"
+        app:layout_constraintTop_toTopOf="@id/profileCard">
+
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_person" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/userNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="7dp"
+        android:elevation="2dp"
+        android:text="Username"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/imageCard"
+        app:layout_constraintTop_toTopOf="@id/imageCard" />
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:elevation="2dp"
+        android:text="email"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="normal"
+        app:layout_constraintLeft_toRightOf="@id/imageCard"
+        app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
+
+    <ImageButton
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/transparent"
+        android:elevation="2dp"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@id/profileCard"
+        app:layout_constraintRight_toRightOf="@id/profileCard"
+        app:layout_constraintTop_toTopOf="@id/profileCard"
+        app:tint="@color/white" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/stopWordsCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="15dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@id/commentsButton"
+        app:layout_constraintEnd_toEndOf="@id/profileCard"
+        app:layout_constraintStart_toStartOf="@id/profileCard"
+        app:layout_constraintTop_toBottomOf="@id/profileCard" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stopWordRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_margin="10dp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toTopOf="@id/addWordEditText"
+        app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
+        app:layout_constraintStart_toStartOf="@id/stopWordsCard"
+        app:layout_constraintTop_toBottomOf="@id/stopWordsTextView"
+        tools:listitem="@layout/stop_word_item" />
+
+    <EditText
+        android:id="@+id/addWordEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="2dp"
+        android:hint="@string/enter_your_stop_word"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@id/stopWordsCard"
+        app:layout_constraintEnd_toStartOf="@id/addWordButton"
+        app:layout_constraintStart_toStartOf="@id/stopWordsCard"
+        app:layout_constraintTop_toBottomOf="@id/stopWordRecyclerView" />
+
+    <Button
+        android:id="@+id/addWordButton"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="10dp"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="@id/stopWordsCard"
+        app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
+        app:layout_constraintStart_toEndOf="@+id/addWordEditText"
+        app:layout_constraintTop_toBottomOf="@id/stopWordRecyclerView" />
+
+    <TextView
+        android:id="@+id/stopWordsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_forbidden"
+        android:elevation="2dp"
+        android:text="My Stop Words"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/stopWordRecyclerView"
+        app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
+        app:layout_constraintStart_toStartOf="@id/stopWordsCard"
+        app:layout_constraintTop_toTopOf="@id/stopWordsCard" />
+
+    <Button
+        android:id="@+id/commentsButton"
+        style="@style/BigButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/yellow"
+        android:text="Comments"
+        app:layout_constraintEnd_toStartOf="@id/contactsButton"
+        app:layout_constraintStart_toStartOf="@id/stopWordsCard"
+        app:layout_constraintTop_toBottomOf="@id/stopWordsCard" />
+
+    <Button
+        android:id="@+id/contactsButton"
+        style="@style/BigButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/light_blue"
+        android:text="Contacts"
+        app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
+        app:layout_constraintStart_toEndOf="@id/commentsButton"
+        app:layout_constraintTop_toBottomOf="@id/stopWordsCard" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
