@@ -7,26 +7,24 @@ import androidx.room.RoomDatabase
 import com.selftutor.besafetogether.model.database.stopwords.StopWord
 import com.selftutor.besafetogether.model.database.stopwords.StopWordsDao
 
-@Database(entities = [StopWord::class], version = 2, exportSchema = false)
+@Database(entities = [StopWord::class], version = 2)
 abstract class SafeTogetherDb() : RoomDatabase() {
 
 	abstract fun getStopWordsDao(): StopWordsDao
 
 	companion object {
 		@Volatile
-		private var INSTANCE: SafeTogetherDb? = null
+		private var instance: SafeTogetherDb? = null
+		private val LOCK = Any()
 
-		fun getDatabase(context: Context): SafeTogetherDb {
-			return INSTANCE ?: synchronized(this) {
-				val instance = Room.databaseBuilder(
-					context.applicationContext,
-					SafeTogetherDb::class.java,
-					"safeTogetherDb").build()
-				INSTANCE = instance
-
-				instance
+		operator fun invoke(context: Context) = instance ?: synchronized(LOCK){
+			instance ?: createDatabase(context).also{
+				instance = it
 			}
-
 		}
+
+		private fun createDatabase(context: Context) =
+			Room.databaseBuilder(context.applicationContext, SafeTogetherDb::class.java, "SafeTogetherDatabase.db" )
+				.build()
 	}
 }

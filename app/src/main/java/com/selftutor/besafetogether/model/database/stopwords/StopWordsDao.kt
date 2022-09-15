@@ -5,12 +5,13 @@ import androidx.room.*
 
 @Dao
 interface StopWordsDao {
-	@Insert(onConflict = OnConflictStrategy.IGNORE)
-	fun insert(stopWord: StopWord)
+	@Insert(onConflict = OnConflictStrategy.REPLACE)
+	suspend fun insert(stopWord: StopWord)
 
 	@Delete
-	fun delete(stopWord: StopWord)
+	suspend fun delete(stopWord: StopWord)
 
 	@Query("SELECT * FROM stopWordsTable order by id ASC")
-	fun getAllStopWords(): List<StopWord>
+	fun getAllStopWords(): LiveData<List<StopWord>>
+
 }

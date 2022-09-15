@@ -13,7 +13,7 @@ class StopWordsAdapter(
 	private val stopWordsActionListener: StopWordsActionListener
 ) : RecyclerView.Adapter<StopWordsAdapter.ViewHolder>(){
 
-	var stopWords : List<StopWord> = emptyList()
+	var stopWords : ArrayList<StopWord> = ArrayList()
 		set(value){
 			field = value
 			notifyDataSetChanged()
@@ -34,18 +34,25 @@ class StopWordsAdapter(
 			wordTextView.text = stopWord.word
 
 			deleteImageView.setOnClickListener{
-				stopWordsActionListener.onUserDelete(stopWord)
+				stopWordsActionListener.onStopWordDelete(stopWord)
 			}
 		}
 	}
 
 	override fun getItemCount(): Int = stopWords.size
+
+	fun updateList(newList : List<StopWord>){
+		stopWords.clear()
+		stopWords.addAll(newList)
+
+		notifyDataSetChanged()
+	}
 }
 
 interface StopWordsActionListener {
 	// creating a method for click
 	// action on delete image view.
-	fun onUserDelete(stopWord: StopWord)
+	fun onStopWordDelete(stopWord: StopWord)
 
-	fun onUserAdd(stopWord: StopWord)
+	fun onStopWordAdd(stopWord: StopWord)
 }

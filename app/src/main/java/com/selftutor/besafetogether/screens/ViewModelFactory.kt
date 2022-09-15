@@ -22,5 +22,4 @@ class ViewModelFactory(
 	}
 }
 
-//TODO solve problme with context to app cast
 fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as App)

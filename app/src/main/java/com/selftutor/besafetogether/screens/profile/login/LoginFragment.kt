@@ -1,21 +1,22 @@
-package com.selftutor.besafetogether.screens.profile.contacts
+package com.selftutor.besafetogether.screens.profile.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.selftutor.besafetogether.databinding.FragmentContactsBinding
+import com.selftutor.besafetogether.databinding.FragmentLoginBinding
 
-class ContactsFragment: Fragment() {
-	private lateinit var binding: FragmentContactsBinding
+class LoginFragment: Fragment() {
+
+	private lateinit var binding: FragmentLoginBinding
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
-		binding = FragmentContactsBinding.inflate(inflater, container, false)
+		binding = FragmentLoginBinding.inflate(inflater, container, false)
 
 		return binding.root
 	}

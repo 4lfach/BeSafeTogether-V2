@@ -1,4 +1,6 @@
 package com.selftutor.besafetogether.screens.profile.contacts
 
-class ContactsViewModel {
+import androidx.lifecycle.ViewModel
+
+class ContactsViewModel: ViewModel() {
 }

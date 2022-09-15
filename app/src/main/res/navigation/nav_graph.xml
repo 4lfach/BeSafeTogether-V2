@@ -21,5 +21,25 @@
         android:name="com.selftutor.besafetogether.screens.main.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.selftutor.besafetogether.screens.profile.contacts.ContactsFragment"
+        android:label="ContactsFragment"
+        tools:layout="@layout/fragment_contacts"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.selftutor.besafetogether.screens.profile.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.selftutor.besafetogether.screens.profile.signup.SignupFragment"
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_signup"/>
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.selftutor.besafetogether.screens.profile.comments.CommentsFragment"
+        android:label="CommentsFragment"
+        tools:layout="@layout/fragment_comments"/>
 
 </navigation>

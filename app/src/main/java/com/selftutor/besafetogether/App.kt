@@ -8,12 +8,12 @@ import com.selftutor.besafetogether.model.database.stopwords.StopWordsRepository
 
 class App: Application(
 ) {
-	private lateinit var stopWordsDao: StopWordsDao
+	private lateinit var database: SafeTogetherDb
 	lateinit var stopWordsRepo : StopWordsRepository
 
 	override fun onCreate() {
 		super.onCreate()
-		stopWordsDao = SafeTogetherDb.getDatabase(applicationContext).getStopWordsDao()
-		stopWordsRepo = StopWordsRepository(stopWordsDao)
+		database = SafeTogetherDb(this)
+		stopWordsRepo = StopWordsRepository(database)
 	}
 }

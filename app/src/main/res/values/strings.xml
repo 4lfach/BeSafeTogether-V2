@@ -7,4 +7,17 @@
     <string name="go_back">Go Back</string>
     <string name="main_button">Main Button</string>
     <string name="enter_your_stop_word">Enter your stop word</string>
+    <string name="date_format">dd MMM, yyyy - HH:mm</string>
+    <string name ="stop_word_added">"Stop word was added"</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="log_in_to_your_account">Log in to your account</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="have_an_account">Already have an account?</string>
+    <string name="log_in">Log in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_your_account">Create your account</string>
 </resources>

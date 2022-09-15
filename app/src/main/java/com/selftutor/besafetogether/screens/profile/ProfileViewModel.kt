@@ -1,36 +1,51 @@
 package com.selftutor.besafetogether.screens.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.selftutor.besafetogether.model.database.stopwords.StopWord
 import com.selftutor.besafetogether.model.database.stopwords.StopWordsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
-	val stopWordsRepository: StopWordsRepository
+	private val stopWordsRepository: StopWordsRepository
 ) : ViewModel(), StopWordsActionListener {
 
 	private val _stopWords = MutableLiveData<List<StopWord>>()
-	val stopWords: LiveData<List<StopWord>> = _stopWords
+	var stopWords : LiveData<List<StopWord>> = _stopWords
 
 	private val _actionShowToast = MutableLiveData<Int>()
 	val actionShowToast: LiveData<Int> = _actionShowToast
 
 	init{
-		_stopWords.value = stopWordsRepository.allStopWords
+		viewModelScope.launch(Dispatchers.IO) {
+			testData()
+			val words = stopWordsRepository.getAllStopWords().value
+			_stopWords.value = words ?: null
+		}
 	}
 
-	override fun onUserDelete(stopWord: StopWord) {
-		viewModelScope.launch {
+	override fun onStopWordDelete(stopWord: StopWord) {
+		viewModelScope.launch(Dispatchers.IO) {
 			stopWordsRepository.delete(stopWord)
 		}
 	}
 
-	override fun onUserAdd(stopWord: StopWord) {
-		viewModelScope.launch {
+	override fun onStopWordAdd(stopWord: StopWord) {
+		viewModelScope.launch(Dispatchers.IO) {
 			stopWordsRepository.insert(stopWord)
+		}
+	}
+
+	fun testData(){
+		val stopwords = listOf<StopWord>(
+			StopWord("", "smth"),
+			StopWord("", "smth2"),
+			StopWord("", "smth3"),
+		)
+		viewModelScope.launch { 
+			stopWordsRepository.insertStopWords(stopwords)
 		}
 	}
 

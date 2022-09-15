@@ -1,14 +1,19 @@
 package com.selftutor.besafetogether.model.database.stopwords
 
-class StopWordsRepository(private val stopWordsDao: StopWordsDao) {
+import androidx.lifecycle.LiveData
+import com.selftutor.besafetogether.model.database.SafeTogetherDb
 
-	val allStopWords = stopWordsDao.getAllStopWords()
+class StopWordsRepository(private val db: SafeTogetherDb) {
 
-	suspend fun insert(word: StopWord){
-		stopWordsDao.insert(word)
-	}
+	suspend fun insert(word: StopWord) = db.getStopWordsDao().insert(word)
 
-	suspend fun delete(word: StopWord){
-		stopWordsDao.delete(word)
+	suspend fun delete(word: StopWord) = db.getStopWordsDao().delete(word)
+
+	fun getAllStopWords() = db.getStopWordsDao().getAllStopWords()
+
+	suspend fun insertStopWords(words: List<StopWord>) {
+		for (word  in words){
+			db.getStopWordsDao().insert(word)
+		}
 	}
 }
