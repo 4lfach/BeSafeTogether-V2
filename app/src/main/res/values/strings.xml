@@ -20,4 +20,13 @@
     <string name="username">Username</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="create_your_account">Create your account</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="no_contacts">No available contacts.</string>
+    <string name="def_message_contacts">Set default message for contacts</string>
+    <string name="message_hint">Type...</string>
+    <string name="save_message">Save Message</string>
+    <string name="receive_gps">Receive GPS</string>
+    <string name="set_danger_place">Set Dangerous place</string>
 </resources>

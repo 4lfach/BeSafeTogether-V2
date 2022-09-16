@@ -1,10 +1,13 @@
 package com.selftutor.besafetogether.screens.profile.signup
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentSignupBinding
 
 class SignupFragment: Fragment() {
@@ -18,6 +21,66 @@ class SignupFragment: Fragment() {
 	): View? {
 		binding = FragmentSignupBinding.inflate(inflater, container, false)
 
+		binding.signupButton.setOnClickListener {
+			if(checkUserCredentials()){
+				findNavController().navigate(R.id.action_signupFragment_to_profileFragment)
+			}
+		}
+
+		binding.loginTextView.setOnClickListener {
+			findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
+		}
+
 		return binding.root
 	}
+
+	private fun checkUserCredentials(): Boolean {
+		var counter = 0
+
+		with(binding){
+			val email = emailTextView.text.toString()
+			val username = userNameTextView.text.toString()
+			val password = passwordEditText.text.toString()
+			val confirmPassword = confirmPasswordEditText.text.toString()
+
+			if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isNullOrEmpty()){
+				emailTextView.error = "Email is invalid\n"
+				counter++
+			}
+			if(username.isNullOrEmpty()){
+				userNameTextView.error = "Username field is empty"
+				counter++
+			}
+			if(!checkUsernameExists()){
+				userNameTextView.error = "This username is already taken"
+				counter++
+			}
+			if(!checkEmailExists()){
+				emailTextView.error = "This email is already taken"
+				counter++
+			}
+			if (password.isNullOrEmpty()){
+				passwordEditText.error = "Password field is empty\n"
+				counter++
+			}
+			if(password != confirmPassword){
+				passwordEditText.error = "Passwords do not match"
+				confirmPasswordEditText.error = "Passwords do not match"
+			}
+			if (counter != 0)
+				return false
+		}
+		return true
+	}
+
+	private fun checkUsernameExists(): Boolean {
+		//todo connect to api repository to check if username already exists. SignUpViewModel has to handle it
+		return true
+	}
+
+	private fun checkEmailExists(): Boolean{
+		//todo connect to api repository to check if email already exists. SignUpViewModel has to handle it
+		return true
+	}
+
 }

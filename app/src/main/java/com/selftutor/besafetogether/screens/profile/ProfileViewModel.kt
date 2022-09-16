@@ -20,9 +20,8 @@ class ProfileViewModel(
 
 	init{
 		viewModelScope.launch(Dispatchers.IO) {
-			testData()
 			val words = stopWordsRepository.getAllStopWords().value
-			_stopWords.value = words ?: null
+			_stopWords.postValue(testData())
 		}
 	}
 
@@ -38,15 +37,16 @@ class ProfileViewModel(
 		}
 	}
 
-	fun testData(){
+	fun testData(): List<StopWord>{
 		val stopwords = listOf<StopWord>(
 			StopWord("", "smth"),
 			StopWord("", "smth2"),
 			StopWord("", "smth3"),
 		)
-		viewModelScope.launch { 
-			stopWordsRepository.insertStopWords(stopwords)
-		}
+		return stopwords
+		//viewModelScope.launch {
+		//	stopWordsRepository.insertStopWords(stopwords)
+		//}
 	}
 
 }

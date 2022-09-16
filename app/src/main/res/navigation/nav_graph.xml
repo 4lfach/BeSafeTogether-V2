@@ -15,27 +15,50 @@
         android:id="@+id/profileFragment"
         android:name="com.selftutor.besafetogether.screens.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.selftutor.besafetogether.screens.main.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
+
     <fragment
         android:id="@+id/contactsFragment"
         android:name="com.selftutor.besafetogether.screens.profile.contacts.ContactsFragment"
         android:label="ContactsFragment"
         tools:layout="@layout/fragment_contacts"/>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.selftutor.besafetogether.screens.profile.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.selftutor.besafetogether.screens.profile.signup.SignupFragment"
         android:label="SignupFragment"
-        tools:layout="@layout/fragment_signup"/>
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/commentsFragment"
         android:name="com.selftutor.besafetogether.screens.profile.comments.CommentsFragment"

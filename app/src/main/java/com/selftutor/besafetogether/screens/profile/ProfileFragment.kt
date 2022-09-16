@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentProfileBinding
 import com.selftutor.besafetogether.model.database.stopwords.StopWord
 import com.selftutor.besafetogether.screens.factory
+import com.selftutor.besafetogether.screens.profile.comments.CommentsFragment.Companion.ARG_USER_ID
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,6 +24,13 @@ class ProfileFragment : Fragment() {
 
 	private lateinit var binding: FragmentProfileBinding
 	private lateinit var adapter: StopWordsAdapter
+
+	//todo create User class with name, email, id
+	private var userId: Int = 0
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -42,23 +52,34 @@ class ProfileFragment : Fragment() {
 		}
 
 		val layoutManager = LinearLayoutManager(requireContext())
-		binding.stopWordRecyclerView.layoutManager = layoutManager
-		binding.stopWordRecyclerView.adapter = adapter
 
-		binding.addWordButton.setOnClickListener {
-			val word = binding.addWordEditText.text.toString()
+		with(binding){
+			stopWordRecyclerView.layoutManager = layoutManager
+			stopWordRecyclerView.adapter = adapter
 
-			if(word.isNotBlank()){
-				val sdf = SimpleDateFormat(getString(R.string.date_format))
-				val currentDateAndTime: String = sdf.format(Date())
-				val stopWord = StopWord(currentDateAndTime, word)
+			addWordButton.setOnClickListener {
+				val word = binding.addWordEditText.text.toString()
 
-				viewModel.onStopWordAdd(stopWord)
+				if(word.isNotBlank()){
+					val sdf = SimpleDateFormat(getString(R.string.date_format))
+					val currentDateAndTime: String = sdf.format(Date())
+					val stopWord = StopWord(currentDateAndTime, word)
 
-				showToast(R.string.stop_word_added)
+					viewModel.onStopWordAdd(stopWord)
+
+					showToast(R.string.stop_word_added)
+				}
 			}
 
+			contactsButton.setOnClickListener {
+				findNavController().navigate(R.id.action_profileFragment_to_contactsFragment)
+			}
+
+			commentsButton.setOnClickListener {
+				findNavController().navigate(R.id.action_profileFragment_to_commentsFragment, bundleOf(ARG_USER_ID to userId))
+			}
 		}
+
 		return binding.root
 	}
 

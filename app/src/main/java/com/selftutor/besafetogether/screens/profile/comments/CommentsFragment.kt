@@ -15,9 +15,13 @@ class CommentsFragment: Fragment() {
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		binding = FragmentCommentsBinding.inflate(inflater, container, false)
 
 		return binding.root
+	}
+
+	companion object{
+		const val ARG_USER_ID = "userId"
 	}
 }
