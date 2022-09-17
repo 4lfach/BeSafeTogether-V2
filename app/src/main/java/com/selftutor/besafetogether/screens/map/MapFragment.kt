@@ -1,18 +1,15 @@
 package com.selftutor.besafetogether.screens.map
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentMapBinding
+import com.selftutor.besafetogether.screens.BaseFragment
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : BaseFragment(), OnMapReadyCallback {
 
 	private lateinit var viewModel: MapViewModel
 	private lateinit var binding: FragmentMapBinding

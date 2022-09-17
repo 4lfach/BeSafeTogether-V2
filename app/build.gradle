@@ -52,8 +52,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
-    implementation 'com.google.android.libraries.places:places:2.4.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.libraries.places:places:2.6.0'
 
     implementation("androidx.room:room-ktx:2.4.3")
     kapt("androidx.room:room-compiler:2.4.3")

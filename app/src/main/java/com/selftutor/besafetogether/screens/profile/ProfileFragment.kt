@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentProfileBinding
 import com.selftutor.besafetogether.model.database.stopwords.StopWord
+import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
 import com.selftutor.besafetogether.screens.profile.comments.CommentsFragment.Companion.ARG_USER_ID
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment() {
 
 	private val viewModel: ProfileViewModel by viewModels { factory() }
 
@@ -81,9 +82,5 @@ class ProfileFragment : Fragment() {
 		}
 
 		return binding.root
-	}
-
-	private fun showToast(messageRes: Int){
-		Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
 	}
 }

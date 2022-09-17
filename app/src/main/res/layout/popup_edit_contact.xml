@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    android:background="@drawable/popup_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id= "@+id/photoImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_edit_contact"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/photoImageView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_person" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/GpsOnSwitch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Receive GPS info"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/saveContactButton"
+        app:layout_constraintEnd_toEndOf="@id/tilName"
+        app:layout_constraintStart_toStartOf="@id/tilPhone"
+        app:layout_constraintTop_toBottomOf="@id/tilPhone" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id ="@+id/saveContactButton"
+        app:layout_constraintStart_toStartOf="@id/tilName"
+        app:layout_constraintEnd_toEndOf="@id/tilPhone"
+        android:text ="@string/save"
+        app:layout_constraintTop_toBottomOf="@id/GpsOnSwitch"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id ="@+id/cancelButton"
+        app:layout_constraintStart_toStartOf="@id/tilName"
+        app:layout_constraintEnd_toEndOf="@id/tilPhone"
+        android:text ="@string/cancel"
+        android:textColor ="@color/black"
+        android:background = "@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/saveContactButton"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

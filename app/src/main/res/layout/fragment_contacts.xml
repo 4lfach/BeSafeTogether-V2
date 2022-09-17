@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,52 +11,42 @@
         android:padding="16dp"
         tools:context=".screens.profile.contacts.ContactsFragment">
 
-        <EditText
-            android:id="@+id/nameEditText"
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/goBackImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:rotation="180"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/name"
-            app:layout_constraintBottom_toTopOf="@id/GpsOnSwitch"
-            app:layout_constraintEnd_toStartOf="@id/phoneEditText"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:text="My contacts"
+            android:layout_marginTop="5dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor = "@color/violet"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <EditText
-            android:id="@+id/phoneEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:hint="@string/phone"
-            android:inputType="phone"
-            app:layout_constraintBottom_toTopOf="@id/GpsOnSwitch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@id/nameEditText"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/GpsOnSwitch"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contactsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contact receives GPS info"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/addContactButton"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@drawable/card_background"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toTopOf="@id/messageTextView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.634"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameEditText" />
-
-        <Button
-            android:id="@+id/addContactButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:text="@string/add_contact"
-            app:layout_constraintBottom_toTopOf="@id/contactsCard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/GpsOnSwitch" />
+            app:layout_constraintTop_toBottomOf="@id/goBackImageView"
+            app:layout_constraintVertical_bias="0.131"
+            tools:listitem="@layout/contact_item" />
 
         <TextView
             android:id="@+id/noRecordsTextView"
@@ -68,77 +57,35 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/contactsCard"
+            app:layout_constraintBottom_toBottomOf="@id/contactsRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/contactsCard" />
+            app:layout_constraintTop_toTopOf="@id/contactsRecyclerView" />
 
-        <!--<com.google.android.material.card.MaterialCardView
-            android:id="@+id/contactsCard"
+        <Button
+            android:id="@+id/addContactButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white_shade"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="15dp"
-            app:strokeColor="@color/purple_200"
-            app:strokeWidth="3dp"
-            app:layout_constraintTop_toBottomOf="@id/addContactButton"
-            app:layout_constraintBottom_toTopOf="@id/messageTextView">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/contactsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_maxHeight="250dp"
-                android:layout_marginHorizontal="5dp"
-                app:layout_constraintBottom_toTopOf="@id/messageTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addContactButton"
-                tools:listitem="@layout/contact_item" />
-
-        </com.google.android.material.card.MaterialCardView> -->
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/contactsCard"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:backgroundTint="@color/white_shade"
-            app:cardCornerRadius="15dp"
+            android:src="@drawable/ic_add"
+            android:text="@string/add_contact"
             app:layout_constraintBottom_toTopOf="@id/messageTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/addContactButton"
-            app:strokeColor="@color/purple_200"
-            app:strokeWidth="3dp">
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/contactsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginHorizontal="5dp"
-            android:elevation="2dp"
-            app:layout_constraintBottom_toBottomOf="@id/contactsCard"
-            app:layout_constraintEnd_toEndOf="@id/contactsCard"
-            app:layout_constraintStart_toStartOf="@id/contactsCard"
-            app:layout_constraintTop_toTopOf="@id/contactsCard"
-            tools:listitem="@layout/contact_item" />
+            app:layout_constraintTop_toBottomOf="@id/contactsRecyclerView" />
 
         <TextView
             android:id="@+id/messageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/def_message_contacts"
             android:layout_marginTop="6dp"
+            android:textSize="16sp"
+            android:text="@string/def_message_contacts"
             android:textColor="@color/black"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintBottom_toTopOf="@id/defaultMessageEditText"
             app:layout_constraintEnd_toStartOf="@id/btnInfoMessage"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contactsCard" />
+            app:layout_constraintTop_toBottomOf="@id/addContactButton" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnInfoMessage"
@@ -146,10 +93,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_info"
             app:fabCustomSize="20dp"
-            app:layout_constraintStart_toEndOf="@id/messageTextView"
             app:layout_constraintBottom_toTopOf="@id/defaultMessageEditText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contactsCard"
+            app:layout_constraintStart_toEndOf="@id/messageTextView"
+            app:layout_constraintTop_toBottomOf="@id/addContactButton"
             app:maxImageSize="30dp" />
 
         <EditText
