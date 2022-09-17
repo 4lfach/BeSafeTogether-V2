@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "stopWordsTable")
+@Entity(tableName = "stopWords")
 class StopWord(
 	@ColumnInfo(name ="timeStamp") val timeStamp: String,
 	@ColumnInfo(name = "word") val word: String) {

@@ -32,6 +32,7 @@ class StopWordsAdapter(
 		with(holder.binding){
 			val stopWord = stopWords[position]
 			wordTextView.text = stopWord.word
+			timeTextView.text = stopWord.timeStamp
 
 			deleteImageView.setOnClickListener{
 				stopWordsActionListener.onStopWordDelete(stopWord)

@@ -12,18 +12,10 @@ class ProfileViewModel(
 	private val stopWordsRepository: StopWordsRepository
 ) : ViewModel(), StopWordsActionListener {
 
-	private val _stopWords = MutableLiveData<List<StopWord>>()
-	var stopWords : LiveData<List<StopWord>> = _stopWords
+	var stopWords : LiveData<List<StopWord>> = stopWordsRepository.getAllStopWords()
 
 	private val _actionShowToast = MutableLiveData<Int>()
 	val actionShowToast: LiveData<Int> = _actionShowToast
-
-	init{
-		viewModelScope.launch(Dispatchers.IO) {
-			val words = stopWordsRepository.getAllStopWords().value
-			_stopWords.postValue(testData())
-		}
-	}
 
 	override fun onStopWordDelete(stopWord: StopWord) {
 		viewModelScope.launch(Dispatchers.IO) {
