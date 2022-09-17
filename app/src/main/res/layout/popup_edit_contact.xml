@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="400dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/popup_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -14,22 +14,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_edit_contact"
+        android:src="@drawable/ic_contact_details"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilName"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:hint="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/photoImageView">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameTextView"
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_person" />
@@ -37,7 +37,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPhone"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"
@@ -47,14 +47,14 @@
         app:layout_constraintTop_toBottomOf="@id/tilName">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userNameTextView"
+            android:id="@+id/phoneEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/GpsOnSwitch"
+        android:id="@+id/gpsOnSwitch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Receive GPS info"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="@id/tilName"
         app:layout_constraintEnd_toEndOf="@id/tilPhone"
         android:text ="@string/save"
-        app:layout_constraintTop_toBottomOf="@id/GpsOnSwitch"/>
+        app:layout_constraintTop_toBottomOf="@id/gpsOnSwitch"/>
 
     <Button
         android:layout_width="0dp"

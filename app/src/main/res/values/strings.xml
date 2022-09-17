@@ -31,4 +31,10 @@
     <string name="set_danger_place">Set Dangerous place</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="stop_word_exists">Stop word already exists.</string>
+    <string name="contact_exists">Contact already exists.</string>
+    <string name="name_empty">Name must not be empty</string>
+    <string name="phone_empty">Phone must not be empty</string>
+    <string name="name_not_empty">Name must not be empty</string>
+    <string name="contact_added">Contact was added</string>
 </resources>

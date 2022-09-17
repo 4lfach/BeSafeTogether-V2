@@ -19,6 +19,6 @@ interface ContactDao {
     @Query("SELECT * FROM contacts order by id ASC")
     fun getAllContacts(): LiveData<List<Contact>>
 
-    @Query("SELECT * FROM stopWords WHERE word = :phone")
+    @Query("SELECT EXISTS(SELECT * FROM contacts WHERE phone = :phone)")
     suspend fun isPhoneExists(phone:String): Boolean
 }

@@ -19,9 +19,6 @@
         <action
             android:id="@+id/action_profileFragment_to_contactsFragment"
             app:destination="@id/contactsFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_commentsFragment"
-            app:destination="@id/commentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -59,10 +56,5 @@
             android:id="@+id/action_signupFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/commentsFragment"
-        android:name="com.selftutor.besafetogether.screens.profile.comments.CommentsFragment"
-        android:label="CommentsFragment"
-        tools:layout="@layout/fragment_comments"/>
 
 </navigation>

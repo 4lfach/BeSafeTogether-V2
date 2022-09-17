@@ -14,6 +14,6 @@ interface StopWordsDao {
 	@Query("SELECT * FROM stopWords order by id ASC")
 	fun getAllStopWords(): LiveData<List<StopWord>>
 
-	@Query("SELECT * FROM stopWords WHERE word = :word")
+	@Query("SELECT EXISTS(SELECT * FROM stopWords WHERE word = :word)")
 	suspend fun isWordExists(word:String): Boolean
 }

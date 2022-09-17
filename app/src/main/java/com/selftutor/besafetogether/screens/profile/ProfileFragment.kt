@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +12,6 @@ import com.selftutor.besafetogether.databinding.FragmentProfileBinding
 import com.selftutor.besafetogether.model.database.stopwords.StopWord
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
-import com.selftutor.besafetogether.screens.profile.comments.CommentsFragment.Companion.ARG_USER_ID
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,10 +25,6 @@ class ProfileFragment : BaseFragment() {
 	//todo create User class with name, email, id
 	private var userId: Int = 0
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-	}
-
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -41,6 +33,7 @@ class ProfileFragment : BaseFragment() {
 
 		binding = FragmentProfileBinding.inflate(inflater, container, false)
 		adapter = StopWordsAdapter(viewModel)
+		val layoutManager = LinearLayoutManager(requireContext())
 
 		viewModel.stopWords.observe(viewLifecycleOwner){
 			it.let{
@@ -52,7 +45,6 @@ class ProfileFragment : BaseFragment() {
 			showToast(it)
 		}
 
-		val layoutManager = LinearLayoutManager(requireContext())
 
 		with(binding){
 			stopWordRecyclerView.layoutManager = layoutManager
@@ -74,10 +66,6 @@ class ProfileFragment : BaseFragment() {
 
 			contactsButton.setOnClickListener {
 				findNavController().navigate(R.id.action_profileFragment_to_contactsFragment)
-			}
-
-			commentsButton.setOnClickListener {
-				findNavController().navigate(R.id.action_profileFragment_to_commentsFragment, bundleOf(ARG_USER_ID to userId))
 			}
 		}
 

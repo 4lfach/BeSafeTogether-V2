@@ -18,5 +18,7 @@ class App: Application(
 		database = SafeTogetherDb(this)
 		stopWordsRepo = StopWordsRepository(database.getStopWordsDao())
 		contactsRepo = ContactsRepository(database.getContactsDao())
+
+		//hochu
 	}
 }

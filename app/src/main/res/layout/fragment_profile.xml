@@ -87,7 +87,7 @@
         android:layout_marginVertical="15dp"
         android:elevation="5dp"
         app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@id/commentsButton"
+        app:layout_constraintBottom_toTopOf="@id/contactsButton"
         app:layout_constraintEnd_toEndOf="@id/profileCard"
         app:layout_constraintStart_toStartOf="@id/profileCard"
         app:layout_constraintTop_toBottomOf="@id/profileCard" />
@@ -133,7 +133,7 @@
         android:id="@+id/stopWordsTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/ic_forbidden"
         android:elevation="2dp"
@@ -148,28 +148,15 @@
         app:layout_constraintTop_toTopOf="@id/stopWordsCard" />
 
     <Button
-        android:id="@+id/commentsButton"
-        style="@style/BigButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/yellow"
-        android:text="Comments"
-        app:layout_constraintEnd_toStartOf="@id/contactsButton"
-        app:layout_constraintStart_toStartOf="@id/stopWordsCard"
-        app:layout_constraintTop_toBottomOf="@id/stopWordsCard" />
-
-    <Button
         android:id="@+id/contactsButton"
         style="@style/BigButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/light_blue"
         android:text="Contacts"
         app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
-        app:layout_constraintStart_toEndOf="@id/commentsButton"
+        app:layout_constraintStart_toStartOf="@id/stopWordsCard"
         app:layout_constraintTop_toBottomOf="@id/stopWordsCard" />
 
 
