@@ -1,14 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.main.MainFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.home.HomeFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Main"
-        android:textSize="40sp"/>
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor = "@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/detailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press the button to start scanning for stop words"
+        android:textSize="16sp"
+        android:textColor = "@color/gray"
+        app:layout_constraintStart_toStartOf="@id/requirementsCard"
+        app:layout_constraintEnd_toEndOf="@id/requirementsCard"
+        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id = "@+id/startScanButton"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        app:cornerRadius="100dp"
+        app:icon = "@drawable/ic_mic"
+        app:iconGravity="textTop"
+        android:text="Start Scanning"
+        android:textSize ="16sp"
+        android:enabled = "false"
+        android:background="@drawable/button_ripple_background"
+        android:textAllCaps = "false"
+        app:layout_constraintTop_toBottomOf="@id/detailTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/requirementsCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/startScanButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/violet"
+        android:layout_margin="20dp"
+        android:elevation="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom = "20dp">
+
+            <TextView
+                android:id="@+id/requirementsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16sp"
+                android:text="Requirements to use"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/gpsOnCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GPS is enabled"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:buttonTint="@color/white"
+                android:clickable ="false"
+                android:layout_below="@+id/requirementsTextView"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/contactsCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gpsOnCheckBox"
+                android:text="Contacts are set"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:buttonTint="@color/white" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/stopWordsCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stop Words are set"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:buttonTint="@color/white"
+                android:layout_below="@+id/contactsCheckBox" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

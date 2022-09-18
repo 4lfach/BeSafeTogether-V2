@@ -2,6 +2,7 @@ package com.selftutor.besafetogether
 
 import android.app.Application
 import androidx.room.Database
+import com.selftutor.besafetogether.model.api.PlacesService
 import com.selftutor.besafetogether.model.database.SafeTogetherDb
 import com.selftutor.besafetogether.model.database.contacts.ContactsRepository
 import com.selftutor.besafetogether.model.database.stopwords.StopWordsDao
@@ -13,12 +14,15 @@ class App: Application(
 	lateinit var stopWordsRepo : StopWordsRepository
 	lateinit var contactsRepo: ContactsRepository
 
+	lateinit var placesService: PlacesService
+
 	override fun onCreate() {
 		super.onCreate()
 		database = SafeTogetherDb(this)
 		stopWordsRepo = StopWordsRepository(database.getStopWordsDao())
 		contactsRepo = ContactsRepository(database.getContactsDao())
 
+		placesService = PlacesService()
 		//hochu
 	}
 }

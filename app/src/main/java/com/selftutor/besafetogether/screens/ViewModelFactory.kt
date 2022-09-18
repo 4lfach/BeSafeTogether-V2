@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.selftutor.besafetogether.App
+import com.selftutor.besafetogether.screens.home.HomeViewModel
+import com.selftutor.besafetogether.screens.map.MapViewModel
 import com.selftutor.besafetogether.screens.profile.ProfileViewModel
 import com.selftutor.besafetogether.screens.profile.contacts.ContactsViewModel
 
@@ -17,6 +19,12 @@ class ViewModelFactory(
 			}
 			ContactsViewModel::class.java->{
 				ContactsViewModel(app.contactsRepo)
+			}
+			MapViewModel::class.java->{
+				MapViewModel(app.placesService)
+			}
+			HomeViewModel::class.java->{
+				HomeViewModel(app.contactsRepo, app.stopWordsRepo)
 			}
 			else -> {
 				throw IllegalStateException("Unknown viewModel class")
