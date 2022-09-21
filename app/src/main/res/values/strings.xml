@@ -38,4 +38,6 @@
     <string name="name_not_empty">Name must not be empty</string>
     <string name="contact_added">Contact was added</string>
     <string name="enable_gps">Enable GPS to find your location</string>
+    <string name="gps_enabled">GPS was enabled</string>
+    <string name="gps_not_enabled">GPS was not enabled</string>
 </resources>
