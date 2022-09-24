@@ -1,153 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".screens.home.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:textColor = "@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <data>
 
-    <TextView
-        android:id="@+id/detailTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Press the button to start scanning for stop words"
-        android:textSize="16sp"
-        android:textColor = "@color/gray"
-        app:layout_constraintStart_toStartOf="@id/requirementsCard"
-        app:layout_constraintEnd_toEndOf="@id/requirementsCard"
-        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"/>
+        <variable
+            name="viewModel"
+            type="com.selftutor.besafetogether.screens.home.HomeViewModel" />
+    </data>
 
-    <com.google.android.material.button.MaterialButton
-        android:id = "@+id/startScanButton"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        app:cornerRadius="100dp"
-        app:icon = "@drawable/ic_mic"
-        app:iconGravity="textTop"
-        android:text="Start Scanning"
-        android:textSize ="16sp"
-        android:enabled = "false"
-        android:background="@drawable/button_ripple_background"
-        android:textAllCaps = "false"
-        app:layout_constraintTop_toBottomOf="@id/detailTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/requirementsCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/startScanButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="@color/violet"
-        android:layout_margin="20dp"
-        android:elevation="5dp">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        tools:context=".screens.home.HomeFragment">
+
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/welcome"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/detailTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_page_details"
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/requirementsCard"
+            app:layout_constraintStart_toStartOf="@id/requirementsCard"
+            app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/startScanButton"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_ripple_background"
+            android:enabled="@{viewModel.scanButtonEnabled}"
+            android:text="@string/start_scanning"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:cornerRadius="100dp"
+            app:icon="@drawable/ic_mic"
+            app:iconGravity="textTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailTextView"
+            app:layout_constraintBottom_toTopOf="@id/requirementsCard"/>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/requirementsCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom = "20dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:elevation="5dp"
+            app:cardBackgroundColor="@color/violet"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/startScanButton">
 
-            <TextView
-                android:id="@+id/requirementsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16sp"
-                android:text="Requirements to use"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/gpsOnCheckBox"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/requirementsTextView"
-                android:clickable="false"
-                android:text="GPS is enabled"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:buttonTint="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/requirementsTextView"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp">
 
-            <ImageButton
-                android:id="@+id/gpsOnButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@id/gpsOnCheckBox"
-                app:layout_constraintTop_toTopOf="@id/gpsOnCheckBox"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                <TextView
+                    android:id="@+id/requirementsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16sp"
+                    android:text="@string/requirements_use"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/contactsCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/gpsOnCheckBox"
-                android:text="Contacts are set"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:buttonTint="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/gpsOnCheckBox"
-                app:layout_constraintStart_toStartOf="parent"/>
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/gpsOnCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.gpsIsOn}"
+                    android:clickable="false"
+                    android:text="@string/gps_enabled"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:buttonTint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/requirementsTextView" />
 
-            <ImageButton
-                android:id="@+id/setContactsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@id/contactsCheckBox"
-                app:layout_constraintTop_toTopOf="@id/contactsCheckBox"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                <ImageButton
+                    android:id="@+id/gpsOnButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/gpsOnCheckBox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/gpsOnCheckBox" />
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/stopWordsCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Stop Words are set"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                app:buttonTint="@color/white"
-                android:layout_below="@+id/contactsCheckBox"
-                app:layout_constraintTop_toBottomOf="@id/contactsCheckBox"
-                app:layout_constraintStart_toStartOf="parent"/>
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/contactsCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.contacts.size()>0}"
+                    android:clickable="false"
+                    android:text="@string/contacts_set"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:buttonTint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/gpsOnCheckBox" />
 
-            <ImageButton
-                android:id="@+id/setStopWordsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@id/stopWordsCheckBox"
-                app:layout_constraintTop_toTopOf="@id/stopWordsCheckBox"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                <ImageButton
+                    android:id="@+id/setContactsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/contactsCheckBox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/contactsCheckBox" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/stopWordsCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.stopWords.size()>0}"
+                    android:clickable="false"
+                    android:text="@string/stop_words_set"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:buttonTint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/contactsCheckBox" />
+
+                <ImageButton
+                    android:id="@+id/setStopWordsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/stopWordsCheckBox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/stopWordsCheckBox" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

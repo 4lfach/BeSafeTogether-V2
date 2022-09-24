@@ -1,36 +1,60 @@
 package com.selftutor.besafetogether.screens.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.selftutor.besafetogether.model.database.contacts.Contact
 import com.selftutor.besafetogether.model.database.contacts.ContactsRepository
+import com.selftutor.besafetogether.model.database.stopwords.StopWord
 import com.selftutor.besafetogether.model.database.stopwords.StopWordsRepository
 
-class HomeViewModel(private val contactsRepo: ContactsRepository,
-private val stopWordsRepo: StopWordsRepository) : ViewModel() {
+class HomeViewModel(contactsRepo: ContactsRepository,
+stopWordsRepo: StopWordsRepository) : ViewModel() {
 
     private val _gpsIsOn = MutableLiveData<Boolean>()
     val gpsIsOn : LiveData<Boolean> = _gpsIsOn
 
-    private val _contactsSet = MutableLiveData<Boolean>()
-    val contactsSet : LiveData<Boolean> = _contactsSet
+    val contacts : LiveData<List<Contact>> = contactsRepo.getAllContacts()
 
-    private val _stopWordsSet = MutableLiveData<Boolean>()
-    val stopWordsSet : LiveData<Boolean> = _stopWordsSet
+    val stopWords: LiveData<List<StopWord>> = stopWordsRepo.getAllStopWords()
 
-    private var _buttonEnabled = MutableLiveData<Boolean>()
-        set(value) {
-            if(_contactsSet.value!! && gpsIsOn.value!! && _stopWordsSet.value!!){
-                field.value = true
-            }
-            field.value = false
+    private var _scanButtonEnabled = MediatorLiveData<Boolean>()
+    val scanButtonEnabled : LiveData<Boolean> = _scanButtonEnabled
+
+    init{
+        _scanButtonEnabled.addSource(_gpsIsOn){
+            _scanButtonEnabled.value = checkRequirements()
         }
-    val scanButtonEnabled : LiveData<Boolean> = _buttonEnabled
+        _scanButtonEnabled.addSource(contacts){
+            _scanButtonEnabled.value = checkRequirements()
+        }
 
-    init {
-
+        _scanButtonEnabled.addSource(stopWords){
+            _scanButtonEnabled.value = checkRequirements()
+        }
     }
 
+    private fun checkRequirements(): Boolean{
+        if(_gpsIsOn.value == true && contacts.value?.isNotEmpty() == true && stopWords.value?.isNotEmpty() == true){
+            return true
+        }
+        return false
+    }
 
+    fun onGpsPermissionGranted(granted: Boolean) {
+        _gpsIsOn.value = granted
+    }
+
+    fun onStartScan(){
+        //todo some shit with voice repository
+    }
+
+    fun onStopScan(){
+        //todo stop doing shit with voice repository
+    }
 }
+
+
 

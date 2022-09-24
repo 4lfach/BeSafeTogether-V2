@@ -28,6 +28,8 @@ abstract class SafeTogetherDb() : RoomDatabase() {
 
 		private fun createDatabase(context: Context) =
 			Room.databaseBuilder(context.applicationContext, SafeTogetherDb::class.java, "SafeTogether.db" )
+				.allowMainThreadQueries()
+				.fallbackToDestructiveMigrationOnDowngrade()
 				.build()
 	}
 }
