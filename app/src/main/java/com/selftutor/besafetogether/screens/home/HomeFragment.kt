@@ -1,15 +1,20 @@
 package com.selftutor.besafetogether.screens.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,11 +24,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentHomeBinding
 import com.selftutor.besafetogether.model.database.stopwords.StopWord
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
+import java.io.IOException
+import java.util.*
 
 
 class HomeFragment : BaseFragment(), RecognitionListener {
@@ -40,15 +50,19 @@ class HomeFragment : BaseFragment(), RecognitionListener {
     private var speechRecognizer: SpeechRecognizer? = null
     private lateinit var recognizerIntent: Intent
 
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val context = requireContext()
 
         permissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){}
 
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
-        val context = requireContext()
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context)
         Log.i(TAG, "isRecognitionAvailable: " + SpeechRecognizer.isRecognitionAvailable(context))
         speechRecognizer!!.setRecognitionListener(this)
@@ -198,20 +212,58 @@ class HomeFragment : BaseFragment(), RecognitionListener {
         }
         binding.resultsTextView.text = text
         val speech = text
-        val stopWords = viewModel.stopWords.value
 
-        if (stopWords != null) {
-            findStopWord(speech, stopWords)
+        if(findStopWord(speech)){
+            sendMessage()
         }
     }
 
-    private fun findStopWord(speech: String, stopWords: List<StopWord>) {
-        val speech = speech.split(" ")
-        for (word in stopWords) {
-            if (word.word in speech) {
-                showToast("$word was found")
+    private fun sendMessage() {
+        val contacts =  viewModel.contacts.value
+        val latLng = getLastLocation()
+
+        val message = "Help me! You can find me using this link\n https://maps.google.com/?q=${latLng.latitude},${latLng.longitude}"
+
+        try {
+            val smsManager = SmsManager.getDefault()
+
+            if (contacts != null) {
+                for(contact in contacts){
+                    smsManager.sendTextMessage(contact.phone, null, message, null, null)
+                }
+            }
+        } catch(e: Exception){
+
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLastLocation(): LatLng {
+        var location: Location = Any() as Location
+
+        if(checkPermissions()){
+            fusedLocationProviderClient.lastLocation.addOnCompleteListener{
+                location = it.result
             }
         }
+
+        return LatLng(location.latitude, location.longitude)
+    }
+
+    private fun findStopWord(speech: String) : Boolean{
+        val stopWords = viewModel.stopWords.value
+
+        val speech = speech.split(" ")
+        if (stopWords != null) {
+            for (word in stopWords) {
+                if (word.word in speech) {
+                    showToast("$word was found")
+
+                    return true
+                }
+            }
+        }
+        return false
     }
     private fun releaseRecognizer() {
         try {
@@ -226,8 +278,7 @@ class HomeFragment : BaseFragment(), RecognitionListener {
     }
 
     private fun getErrorText(error: Int): String {
-        var message = ""
-        message = when (error) {
+        val message = when (error) {
             SpeechRecognizer.ERROR_AUDIO -> "Audio recording error"
             SpeechRecognizer.ERROR_CLIENT -> "Client side error"
             SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> "Insufficient permissions"
@@ -252,7 +303,8 @@ class HomeFragment : BaseFragment(), RecognitionListener {
         val permissions = arrayOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.RECORD_AUDIO
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.SEND_SMS
         )
     }
 }
