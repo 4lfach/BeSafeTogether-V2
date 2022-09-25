@@ -54,12 +54,10 @@ class HomeFragment : BaseFragment(), RecognitionListener {
 
         val context = requireContext()
 
-        permissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
+        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
 
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context)
         Log.i(TAG, "isRecognitionAvailable: " + SpeechRecognizer.isRecognitionAvailable(context))
