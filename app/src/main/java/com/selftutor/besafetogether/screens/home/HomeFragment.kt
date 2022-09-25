@@ -10,6 +10,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
 import android.provider.Settings
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
@@ -24,8 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentHomeBinding
@@ -51,6 +51,7 @@ class HomeFragment : BaseFragment(), RecognitionListener {
     private lateinit var recognizerIntent: Intent
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var myCurrentLocation: LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -177,8 +178,12 @@ class HomeFragment : BaseFragment(), RecognitionListener {
 
     override fun onStop() {
         super.onStop()
-        releaseRecognizer()
+        //releaseRecognizer()
         Log.i(TAG, "destroy")
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onBeginningOfSpeech() {
@@ -220,9 +225,9 @@ class HomeFragment : BaseFragment(), RecognitionListener {
 
     private fun sendMessage() {
         val contacts =  viewModel.contacts.value
-        val latLng = getLastLocation()
 
-        val message = "Help me! You can find me using this link\n https://maps.google.com/?q=${latLng.latitude},${latLng.longitude}"
+        getLastLocation()
+        val message = "Help me! You can find me using this link\n https://maps.google.com/?q=${myCurrentLocation.latitude},${myCurrentLocation.longitude}"
 
         try {
             val smsManager = SmsManager.getDefault()
@@ -238,17 +243,42 @@ class HomeFragment : BaseFragment(), RecognitionListener {
     }
 
     @SuppressLint("MissingPermission")
-    private fun getLastLocation(): LatLng {
-        var location: Location = Any() as Location
+    private fun getLastLocation() {
 
         if(checkPermissions()){
             fusedLocationProviderClient.lastLocation.addOnCompleteListener{
-                location = it.result
+                val location = it.result
+                if(location == null)
+                    requestNewLocationData()
+                else{
+                    myCurrentLocation = LatLng(location.latitude, location.longitude)
+                }
             }
         }
-
-        return LatLng(location.latitude, location.longitude)
     }
+
+    @SuppressLint("MissingPermission")
+    private fun requestNewLocationData() {
+        val mLocationRequest = LocationRequest()
+        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequest.interval = 0
+        mLocationRequest.fastestInterval = 0
+        mLocationRequest.numUpdates = 1
+
+        fusedLocationProviderClient.requestLocationUpdates(
+            mLocationRequest, mLocationCallback,
+            Looper.myLooper()!!
+        )
+    }
+
+    // If current location could not be located, use last location
+    private val mLocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            val mLastLocation: Location? = locationResult.lastLocation
+            myCurrentLocation = LatLng(mLastLocation!!.latitude, mLastLocation.longitude)
+        }
+    }
+
 
     private fun findStopWord(speech: String) : Boolean{
         val stopWords = viewModel.stopWords.value
@@ -265,17 +295,18 @@ class HomeFragment : BaseFragment(), RecognitionListener {
         }
         return false
     }
-    private fun releaseRecognizer() {
-        try {
-            if (null != speechRecognizer) {
-                speechRecognizer!!.destroy()
-                speechRecognizer = null
-            }
-        } catch (e: IllegalArgumentException) { // fix Service not registered: android.speech.SpeechRecognizer$Connection
-            e.printStackTrace()
-            Log.e(TAG, e.message!!)
-        }
-    }
+
+//    private fun releaseRecognizer() {
+//        try {
+//            if (null != speechRecognizer) {
+//                speechRecognizer!!.destroy()
+//                speechRecognizer = null
+//            }
+//        } catch (e: IllegalArgumentException) { // fix Service not registered: android.speech.SpeechRecognizer$Connection
+//            e.printStackTrace()
+//            Log.e(TAG, e.message!!)
+//        }
+//    }
 
     private fun getErrorText(error: Int): String {
         val message = when (error) {
