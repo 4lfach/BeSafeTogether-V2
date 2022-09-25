@@ -5,8 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Address
-import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -29,10 +27,8 @@ import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentHomeBinding
-import com.selftutor.besafetogether.model.database.stopwords.StopWord
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
-import java.io.IOException
 import java.util.*
 
 
@@ -59,10 +55,11 @@ class HomeFragment : BaseFragment(), RecognitionListener {
         val context = requireContext()
 
         permissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){}
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
 
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context)
         Log.i(TAG, "isRecognitionAvailable: " + SpeechRecognizer.isRecognitionAvailable(context))
@@ -75,6 +72,8 @@ class HomeFragment : BaseFragment(), RecognitionListener {
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3)
+
+        getLastLocation()
     }
 
     override fun onCreateView(
@@ -124,6 +123,7 @@ class HomeFragment : BaseFragment(), RecognitionListener {
 
     private fun checkPermissions(): Boolean {
         var counter = 0
+        var granted = false
         for (permission in permissions) {
             if (ActivityCompat.checkSelfPermission(
                     requireContext(),
@@ -218,26 +218,27 @@ class HomeFragment : BaseFragment(), RecognitionListener {
         binding.resultsTextView.text = text
         val speech = text
 
-        if(findStopWord(speech)){
+        if (findStopWord(speech)) {
             sendMessage()
         }
     }
 
     private fun sendMessage() {
-        val contacts =  viewModel.contacts.value
+        val contacts = viewModel.contacts.value
 
         getLastLocation()
-        val message = "Help me! You can find me using this link\n https://maps.google.com/?q=${myCurrentLocation.latitude},${myCurrentLocation.longitude}"
+        val message =
+            "Help me! You can find me using this link\n https://maps.google.com/?q=${myCurrentLocation.latitude},${myCurrentLocation.longitude}"
 
         try {
             val smsManager = SmsManager.getDefault()
 
             if (contacts != null) {
-                for(contact in contacts){
+                for (contact in contacts) {
                     smsManager.sendTextMessage(contact.phone, null, message, null, null)
                 }
             }
-        } catch(e: Exception){
+        } catch (e: Exception) {
 
         }
     }
@@ -245,13 +246,16 @@ class HomeFragment : BaseFragment(), RecognitionListener {
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
 
-        if(checkPermissions()){
+        if (checkPermissions()) {
+
             fusedLocationProviderClient.lastLocation.addOnCompleteListener{
-                val location = it.result
-                if(location == null)
+                val location : Location? = it.result
+
+                if (location == null)
                     requestNewLocationData()
-                else{
+                else {
                     myCurrentLocation = LatLng(location.latitude, location.longitude)
+                    Log.d(TAG, "currentLocation ${myCurrentLocation.latitude}, ${myCurrentLocation.longitude}")
                 }
             }
         }
@@ -280,7 +284,7 @@ class HomeFragment : BaseFragment(), RecognitionListener {
     }
 
 
-    private fun findStopWord(speech: String) : Boolean{
+    private fun findStopWord(speech: String): Boolean {
         val stopWords = viewModel.stopWords.value
 
         val speech = speech.split(" ")
