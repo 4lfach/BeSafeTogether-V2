@@ -47,13 +47,6 @@ stopWordsRepo: StopWordsRepository) : ViewModel() {
         _gpsIsOn.value = granted
     }
 
-    fun onStartScan(){
-        //todo some shit with voice repository
-    }
-
-    fun onStopScan(){
-        //todo stop doing shit with voice repository
-    }
 }
 
 

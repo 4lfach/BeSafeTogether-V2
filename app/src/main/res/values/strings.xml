@@ -42,9 +42,9 @@
     <string name="gps_status_enabled">GPS was enabled</string>
     <string name="gps_status_disabled">GPS was not enabled</string>
 
-    <string name="permission_status_granted">Location Permission is Granted</string>
-    <string name="permission_status_denied">Location Permission is Denied</string>
-    <string name="permission_status_blocked">Location Permission is Blocked</string>
+    <string name="permission_status_granted">Permissions are Granted</string>
+    <string name="permission_status_denied">Permissions are Denied</string>
+    <string name="permission_status_blocked">Permissions are Blocked</string>
 
     <string name="welcome">Welcome</string>
     <string name="start_scanning">Start scanning</string>
@@ -55,4 +55,7 @@
     <string name="stop_words_set">Stop words are set</string>
     <string name="contacts_set">Contacts are set</string>
 
+    <string name="add">Add</string>
+    <string name="my_stop_words">My Stop Words</string>
+    <string name="contacts">Contacts</string>
 </resources>

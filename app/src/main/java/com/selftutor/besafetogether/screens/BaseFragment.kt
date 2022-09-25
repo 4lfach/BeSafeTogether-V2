@@ -10,6 +10,10 @@ open class BaseFragment: Fragment() {
         Toast.makeText(context, getString(messageRes), Toast.LENGTH_SHORT).show()
     }
 
+    fun showToast(messageRes: String){
+        Toast.makeText(context, messageRes, Toast.LENGTH_SHORT).show()
+    }
+
     fun navigate(id: Int){
         findNavController().navigate(id)
     }

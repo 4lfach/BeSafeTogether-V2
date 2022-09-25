@@ -55,8 +55,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detailTextView"
-            app:layout_constraintBottom_toTopOf="@id/requirementsCard"/>
+            app:layout_constraintBottom_toTopOf="@id/resultsTextView"/>
 
+        <TextView
+            android:id="@+id/resultsTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/requirementsCard"
+            app:layout_constraintEnd_toEndOf="@id/requirementsCard"
+            app:layout_constraintTop_toBottomOf="@id/startScanButton"
+            app:layout_constraintBottom_toTopOf="@id/progressBar"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/resultsTextView"
+            app:layout_constraintBottom_toTopOf="@id/requirementsCard"
+            app:layout_constraintStart_toStartOf="@id/requirementsCard"
+            app:layout_constraintEnd_toEndOf="@id/requirementsCard"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="28dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/requirementsCard"
@@ -69,7 +92,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/startScanButton">
+            app:layout_constraintTop_toBottomOf="@id/progressBar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

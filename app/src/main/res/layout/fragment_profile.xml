@@ -123,7 +123,7 @@
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:layout_marginHorizontal="10dp"
-        android:text="Add"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="@id/stopWordsCard"
         app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
         app:layout_constraintStart_toEndOf="@+id/addWordEditText"
@@ -135,17 +135,17 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_forbidden"
         android:elevation="2dp"
-        android:text="My Stop Words"
-        android:textAlignment="center"
+        android:text="@string/my_stop_words"
+        android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/stopWordRecyclerView"
         app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
         app:layout_constraintStart_toStartOf="@id/stopWordsCard"
-        app:layout_constraintTop_toTopOf="@id/stopWordsCard" />
+        app:layout_constraintTop_toTopOf="@id/stopWordsCard"
+        app:drawableLeftCompat="@drawable/ic_forbidden" />
 
     <Button
         android:id="@+id/contactsButton"
@@ -153,8 +153,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:gravity = ""
         android:backgroundTint="@color/light_blue"
-        android:text="Contacts"
+        android:text="@string/contacts"
         app:layout_constraintEnd_toEndOf="@id/stopWordsCard"
         app:layout_constraintStart_toStartOf="@id/stopWordsCard"
         app:layout_constraintTop_toBottomOf="@id/stopWordsCard" />
