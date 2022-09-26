@@ -40,15 +40,20 @@ class SignupFragment: Fragment() {
 		with(binding){
 			val email = emailTextView.text.toString()
 			val username = userNameTextView.text.toString()
+			val phone = phoneTextView.text.toString()
 			val password = passwordEditText.text.toString()
 			val confirmPassword = confirmPasswordEditText.text.toString()
 
-			if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isNullOrEmpty()){
+			if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()){
 				emailTextView.error = "Email is invalid\n"
 				counter++
 			}
-			if(username.isNullOrEmpty()){
+			if(username.isEmpty()){
 				userNameTextView.error = "Username field is empty"
+				counter++
+			}
+			if(!phone.isEmpty()){
+				userNameTextView.error = "Phone field is empty"
 				counter++
 			}
 			if(!checkUsernameExists()){
@@ -59,7 +64,7 @@ class SignupFragment: Fragment() {
 				emailTextView.error = "This email is already taken"
 				counter++
 			}
-			if (password.isNullOrEmpty()){
+			if (password.isEmpty()){
 				passwordEditText.error = "Password field is empty\n"
 				counter++
 			}
