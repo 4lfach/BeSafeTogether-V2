@@ -21,7 +21,7 @@ class ViewModelFactory(
 				ContactsViewModel(app.contactsRepo)
 			}
 			MapViewModel::class.java->{
-				MapViewModel()
+				MapViewModel(app.placeFaker)
 			}
 			HomeViewModel::class.java->{
 				HomeViewModel(app.contactsRepo, app.stopWordsRepo)

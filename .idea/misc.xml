@@ -16,9 +16,12 @@
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/drawable/ic_my_location.xml" value="0.2085" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/drawable/ic_person.xml" value="0.1815" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/drawable/ic_route.xml" value="0.2085" />
+        <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/drawable/ic_settings.xml" value="0.136" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/drawable/round_button.xml" value="0.2085" />
+        <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/drawable/rounded_sheet.xml" value="0.2085" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/layout/activity_main.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/layout/contact_item.xml" value="0.33" />
+        <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/layout/danger_spot_sheet.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/layout/fragment_blank.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/layout/fragment_comments.xml" value="0.271875" />
         <entry key="..\:/Users/alfar/AndroidStudioProjects/BeSafeTogether/app/src/main/res/layout/fragment_contacts.xml" value="0.27291666666666664" />

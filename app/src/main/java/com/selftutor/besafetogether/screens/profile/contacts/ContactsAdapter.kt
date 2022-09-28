@@ -2,7 +2,6 @@ package com.selftutor.besafetogether.screens.profile.contacts
 
 import android.app.Dialog
 import android.content.Context
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -72,7 +71,7 @@ class ContactsAdapter(
         val binding: PopupEditContactBinding = PopupEditContactBinding.inflate(LayoutInflater.from(context))
         dialog.setContentView(binding.root)
         dialog.setCancelable(false)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         with(binding){
             nameEditText.setText(contact.name)
@@ -89,16 +88,18 @@ class ContactsAdapter(
                 val gpsOn = gpsOnSwitch.isChecked
 
                 var error = false
-                if(name.isNullOrEmpty()){
+                if(name.isEmpty()){
                     nameEditText.error = context.getString(R.string.name_empty)
                     error = true
                 }
-                if(phone.isNullOrEmpty()){
+                if(phone.isEmpty()){
                     phoneEditText.error = context.getString(R.string.phone_empty)
                     error = true
                 }
                 if(!error) {
-                    actionListener.onUpdateContact(contact)
+                    val newContact = Contact(name, phone, gpsOn)
+                    actionListener.onUpdateContact(newContact)
+                    notifyDataSetChanged()
                     dialog.dismiss()
                 }
             }

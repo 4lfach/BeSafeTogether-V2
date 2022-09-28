@@ -3,8 +3,24 @@
     <style name="BigButton" parent="Widget.MaterialComponents.Button">
         <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">15dp</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:drawableRight">@drawable/ic_arrow</item>
         <item name="android:textAlignment">textStart</item>
     </style>
+
+    <style name="bottomSheetDialogTheme" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle" >@style/bottomSheetStyle</item>
+    </style>
+
+    <style name="bottomSheetStyle" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="android:background" >@android:color/transparent</item>
+    </style>
+
+    <style name="danger_rating" parent="@android:style/Widget.RatingBar">
+        <item name="android:height">36dip</item>
+        <item name="android:width">36dip</item>
+        <item name="android:progressDrawable">@drawable/danger_ratingbar</item>
+    </style>
+
+
 </resources>
