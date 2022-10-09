@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.ContactItemBinding
 import com.selftutor.besafetogether.databinding.PopupEditContactBinding
-import com.selftutor.besafetogether.model.database.contacts.Contact
+import com.selftutor.besafetogether.data.model.contact.Contact
 
 
 interface ContactActionListener {
-    fun onUpdateContact(contact:Contact)
+    fun onUpdateContact(contact: Contact)
 
     fun onDeleteContact(contact: Contact)
 

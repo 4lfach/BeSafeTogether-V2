@@ -1,7 +1,7 @@
-package com.selftutor.besafetogether.model.api.user
+package com.selftutor.besafetogether.data.api.user
 
 import com.github.javafaker.Faker
-import com.selftutor.besafetogether.model.api.User
+import com.selftutor.besafetogether.data.model.User
 
 class UserFaker {
 

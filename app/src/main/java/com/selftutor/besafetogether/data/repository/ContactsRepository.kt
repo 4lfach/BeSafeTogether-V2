@@ -1,6 +1,8 @@
-package com.selftutor.besafetogether.model.database.contacts
+package com.selftutor.besafetogether.data.repository
 
 import androidx.lifecycle.LiveData
+import com.selftutor.besafetogether.data.model.contact.Contact
+import com.selftutor.besafetogether.data.model.contact.ContactDao
 
 class ContactsRepository(private val dao: ContactDao) {
 

@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentContactsBinding
 import com.selftutor.besafetogether.databinding.PopupEditContactBinding
-import com.selftutor.besafetogether.model.database.contacts.Contact
+import com.selftutor.besafetogether.data.model.contact.Contact
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
 
@@ -26,7 +25,7 @@ class ContactsFragment: BaseFragment() {
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		binding = FragmentContactsBinding.inflate(inflater, container, false)
 		adapter = ContactsAdapter(viewModel, requireContext())
 		val layoutManager = LinearLayoutManager(requireContext())
@@ -71,11 +70,11 @@ class ContactsFragment: BaseFragment() {
 				val gpsOn = gpsOnSwitch.isChecked
 
 				var error = false
-				if(name.isNullOrEmpty()){
+				if(name.isEmpty()){
 					nameEditText.error = requireContext().getString(R.string.name_empty)
 					error = true
 				}
-				if(phone.isNullOrEmpty()){
+				if(phone.isEmpty()){
 					phoneEditText.error = requireContext().getString(R.string.phone_empty)
 				}
 				if(!error){

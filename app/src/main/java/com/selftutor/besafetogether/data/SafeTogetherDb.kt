@@ -1,13 +1,13 @@
-package com.selftutor.besafetogether.model.database
+package com.selftutor.besafetogether.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.selftutor.besafetogether.model.database.contacts.Contact
-import com.selftutor.besafetogether.model.database.contacts.ContactDao
-import com.selftutor.besafetogether.model.database.stopwords.StopWord
-import com.selftutor.besafetogether.model.database.stopwords.StopWordsDao
+import com.selftutor.besafetogether.data.model.contact.Contact
+import com.selftutor.besafetogether.data.model.contact.ContactDao
+import com.selftutor.besafetogether.data.model.stopword.StopWord
+import com.selftutor.besafetogether.data.model.stopword.StopWordsDao
 
 @Database(entities = [StopWord::class, Contact::class], version = 1)
 abstract class SafeTogetherDb() : RoomDatabase() {

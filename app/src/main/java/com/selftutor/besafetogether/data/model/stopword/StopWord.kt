@@ -1,4 +1,4 @@
-package com.selftutor.besafetogether.model.database.stopwords
+package com.selftutor.besafetogether.data.model.stopword
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

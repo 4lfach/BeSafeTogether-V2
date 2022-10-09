@@ -3,8 +3,8 @@ package com.selftutor.besafetogether.screens.profile.contacts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.selftutor.besafetogether.R
-import com.selftutor.besafetogether.model.database.contacts.Contact
-import com.selftutor.besafetogether.model.database.contacts.ContactsRepository
+import com.selftutor.besafetogether.data.model.contact.Contact
+import com.selftutor.besafetogether.data.repository.ContactsRepository
 import com.selftutor.besafetogether.screens.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

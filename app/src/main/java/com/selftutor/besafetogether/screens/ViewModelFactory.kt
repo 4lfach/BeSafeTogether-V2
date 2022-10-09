@@ -8,6 +8,8 @@ import com.selftutor.besafetogether.screens.home.HomeViewModel
 import com.selftutor.besafetogether.screens.map.MapViewModel
 import com.selftutor.besafetogether.screens.profile.ProfileViewModel
 import com.selftutor.besafetogether.screens.profile.contacts.ContactsViewModel
+import com.selftutor.besafetogether.screens.profile.login.LoginViewModel
+import com.selftutor.besafetogether.screens.profile.signup.SignupViewModel
 
 class ViewModelFactory(
 	private val app: App
@@ -25,6 +27,12 @@ class ViewModelFactory(
 			}
 			HomeViewModel::class.java->{
 				HomeViewModel(app.contactsRepo, app.stopWordsRepo)
+			}
+			SignupViewModel::class.java->{
+				SignupViewModel()
+			}
+			LoginViewModel::class.java->{
+				LoginViewModel(app.usersRepository)
 			}
 			else -> {
 				throw IllegalStateException("Unknown viewModel class")

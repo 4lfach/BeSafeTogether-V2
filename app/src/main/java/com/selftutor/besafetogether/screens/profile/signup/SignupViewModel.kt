@@ -3,11 +3,8 @@ package com.selftutor.besafetogether.screens.profile.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
 
-class SignupViewModel: ViewModel() {
-
-    lateinit var mAuth: FirebaseAuth
+class SignupViewModel(): ViewModel() {
 
     private val _username = MutableLiveData<String>()
     val username : LiveData<String> = _username
@@ -24,7 +21,14 @@ class SignupViewModel: ViewModel() {
     private val _confirmPassword = MutableLiveData<String>()
     val confirmPassword : LiveData<String> = _confirmPassword
 
-    fun registerUser(){
+    var canRegister: Boolean = false
 
+    fun registerUser(): Boolean{
+        if(canRegister){
+            return true
+        }
+
+        return false
     }
 }
+

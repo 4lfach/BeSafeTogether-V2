@@ -3,8 +3,8 @@ package com.selftutor.besafetogether.screens.map
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.selftutor.besafetogether.model.api.DangerPlace
-import com.selftutor.besafetogether.model.api.map.PlaceFaker
+import com.selftutor.besafetogether.data.model.DangerPlace
+import com.selftutor.besafetogether.data.api.map.PlaceFaker
 
 class MapViewModel(
     placeFaker: PlaceFaker

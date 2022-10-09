@@ -58,4 +58,18 @@
     <string name="add">Add</string>
     <string name="my_stop_words">My Stop Words</string>
     <string name="contacts">Contacts</string>
+    <string name="select_danger_level_to_write_a_comment">Select danger level to write a comment</string>
+    <string name="all_comments">All comments</string>
+    <string name="num_comments">4 comments</string>
+    <string name="def_username">Alfarabi</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="def_date">22 September 2022</string>
+    <string name="try_again_later">PLease try again later.</string>
+    <string name="username_field_empty">Username field is empty</string>
+    <string name="email_field_empty">Email field is empty</string>
+    <string name="email_invalid">Email is invalid</string>
+    <string name="email_already_exists">This email is already taken</string>
+    <string name="passwords_not_match">Passwords do not match</string>
+    <string name="password_field_empty">Password field is empty\n</string>
+    <string name="unable_to_login">Unable to login</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.selftutor.besafetogether.model.database.contacts
+package com.selftutor.besafetogether.data.model.contact
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

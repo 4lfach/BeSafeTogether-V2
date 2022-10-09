@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentProfileBinding
-import com.selftutor.besafetogether.model.database.stopwords.StopWord
+import com.selftutor.besafetogether.data.model.stopword.StopWord
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
 import java.text.SimpleDateFormat

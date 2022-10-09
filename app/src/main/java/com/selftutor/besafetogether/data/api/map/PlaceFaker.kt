@@ -1,8 +1,8 @@
-package com.selftutor.besafetogether.model.api.map
+package com.selftutor.besafetogether.data.api.map
 
 import com.github.javafaker.Faker
 import com.google.android.gms.maps.model.LatLng
-import com.selftutor.besafetogether.model.api.DangerPlace
+import com.selftutor.besafetogether.data.model.DangerPlace
 
 class PlaceFaker {
 

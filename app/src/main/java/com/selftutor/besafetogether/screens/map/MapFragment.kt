@@ -22,7 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.DangerSpotSheetBinding
 import com.selftutor.besafetogether.databinding.FragmentMapBinding
-import com.selftutor.besafetogether.model.api.DangerPlace
+import com.selftutor.besafetogether.data.model.DangerPlace
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
 
@@ -33,7 +33,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentMapBinding
 
     private lateinit var mMap: GoogleMap
-    private var mapReady: Boolean = false
     private var selectedLocation: LatLng = LatLng(51.154310, 71.433192)
     private var mapZoom: Float = 12.5f
 
@@ -61,17 +60,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
 
         return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-
     }
 
     override fun onMapReady(map: GoogleMap) {

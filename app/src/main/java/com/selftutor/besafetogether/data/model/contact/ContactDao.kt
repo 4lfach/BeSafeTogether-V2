@@ -1,8 +1,7 @@
-package com.selftutor.besafetogether.model.database.contacts
+package com.selftutor.besafetogether.data.model.contact
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.selftutor.besafetogether.model.database.stopwords.StopWord
 
 @Dao
 interface ContactDao {

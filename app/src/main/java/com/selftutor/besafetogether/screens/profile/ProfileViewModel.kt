@@ -1,14 +1,11 @@
 package com.selftutor.besafetogether.screens.profile
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.selftutor.besafetogether.R
-import com.selftutor.besafetogether.model.database.stopwords.StopWord
-import com.selftutor.besafetogether.model.database.stopwords.StopWordsRepository
+import com.selftutor.besafetogether.data.model.stopword.StopWord
+import com.selftutor.besafetogether.data.repository.StopWordsRepository
 import com.selftutor.besafetogether.screens.BaseViewModel
-import com.selftutor.besafetogether.utils.Event
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(

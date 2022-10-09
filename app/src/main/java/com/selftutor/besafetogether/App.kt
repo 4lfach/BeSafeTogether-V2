@@ -1,12 +1,13 @@
 package com.selftutor.besafetogether
 
 import android.app.Application
-import com.selftutor.besafetogether.model.api.map.CommentFaker
-import com.selftutor.besafetogether.model.api.map.PlaceFaker
-import com.selftutor.besafetogether.model.api.user.UserFaker
-import com.selftutor.besafetogether.model.database.SafeTogetherDb
-import com.selftutor.besafetogether.model.database.contacts.ContactsRepository
-import com.selftutor.besafetogether.model.database.stopwords.StopWordsRepository
+import com.selftutor.besafetogether.data.api.map.PlaceFaker
+import com.selftutor.besafetogether.data.SafeTogetherDb
+import com.selftutor.besafetogether.data.api.ApiHelper
+import com.selftutor.besafetogether.data.api.RetrofitBuilder
+import com.selftutor.besafetogether.data.repository.ContactsRepository
+import com.selftutor.besafetogether.data.repository.StopWordsRepository
+import com.selftutor.besafetogether.data.repository.UsersRepository
 
 class App: Application(
 ) {
@@ -14,13 +15,17 @@ class App: Application(
 	lateinit var stopWordsRepo : StopWordsRepository
 	lateinit var contactsRepo: ContactsRepository
 
+	lateinit var usersRepository: UsersRepository
+
 	val placeFaker : PlaceFaker = PlaceFaker()
 
 	override fun onCreate() {
 		super.onCreate()
+
 		database = SafeTogetherDb(this)
 		stopWordsRepo = StopWordsRepository(database.getStopWordsDao())
 		contactsRepo = ContactsRepository(database.getContactsDao())
 
+		usersRepository = UsersRepository(ApiHelper(RetrofitBuilder.apiService))
 	}
 }

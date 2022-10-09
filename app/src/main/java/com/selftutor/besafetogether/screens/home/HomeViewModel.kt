@@ -1,17 +1,17 @@
 package com.selftutor.besafetogether.screens.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.selftutor.besafetogether.model.database.contacts.Contact
-import com.selftutor.besafetogether.model.database.contacts.ContactsRepository
-import com.selftutor.besafetogether.model.database.stopwords.StopWord
-import com.selftutor.besafetogether.model.database.stopwords.StopWordsRepository
+import com.selftutor.besafetogether.data.model.contact.Contact
+import com.selftutor.besafetogether.data.repository.ContactsRepository
+import com.selftutor.besafetogether.data.model.stopword.StopWord
+import com.selftutor.besafetogether.data.repository.StopWordsRepository
 
 class HomeViewModel(contactsRepo: ContactsRepository,
-stopWordsRepo: StopWordsRepository) : ViewModel() {
+                    stopWordsRepo: StopWordsRepository
+) : ViewModel() {
 
     private val _gpsIsOn = MutableLiveData<Boolean>()
     val gpsIsOn : LiveData<Boolean> = _gpsIsOn

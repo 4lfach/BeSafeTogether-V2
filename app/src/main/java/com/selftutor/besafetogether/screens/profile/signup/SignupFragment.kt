@@ -5,87 +5,81 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentSignupBinding
+import com.selftutor.besafetogether.screens.BaseFragment
+import com.selftutor.besafetogether.screens.factory
 
-class SignupFragment: Fragment() {
+class SignupFragment: BaseFragment(){
 
 	private lateinit var binding: FragmentSignupBinding
+	private val viewModel: SignupViewModel by viewModels { factory() }
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		binding = FragmentSignupBinding.inflate(inflater, container, false)
 
 		binding.signupButton.setOnClickListener {
-			if(checkUserCredentials()){
+			if(viewModel.registerUser()){
 				findNavController().navigate(R.id.action_signupFragment_to_profileFragment)
 			}
+			showToast(R.string.try_again_later)
 		}
 
 		binding.loginTextView.setOnClickListener {
 			findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
 		}
 
+		setFieldsObserver()
+
 		return binding.root
 	}
 
-	private fun checkUserCredentials(): Boolean {
-		var counter = 0
-
-		with(binding){
-			val email = emailTextView.text.toString()
-			val username = userNameTextView.text.toString()
-			val phone = phoneTextView.text.toString()
-			val password = passwordEditText.text.toString()
-			val confirmPassword = confirmPasswordEditText.text.toString()
-
-			if(!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.isEmpty()){
-				emailTextView.error = "Email is invalid\n"
-				counter++
+	private fun setFieldsObserver() {
+		viewModel.username.observe(viewLifecycleOwner){
+			if(it.isEmpty()){
+				binding.userNameTextView.error = getString(R.string.username_field_empty)
+				viewModel.canRegister = false
+				return@observe
 			}
-			if(username.isEmpty()){
-				userNameTextView.error = "Username field is empty"
-				counter++
-			}
-			if(!phone.isEmpty()){
-				userNameTextView.error = "Phone field is empty"
-				counter++
-			}
-			if(!checkUsernameExists()){
-				userNameTextView.error = "This username is already taken"
-				counter++
-			}
-			if(!checkEmailExists()){
-				emailTextView.error = "This email is already taken"
-				counter++
-			}
-			if (password.isEmpty()){
-				passwordEditText.error = "Password field is empty\n"
-				counter++
-			}
-			if(password != confirmPassword){
-				passwordEditText.error = "Passwords do not match"
-				confirmPasswordEditText.error = "Passwords do not match"
-			}
-			if (counter != 0)
-				return false
+			viewModel.canRegister = true
 		}
-		return true
-	}
+		viewModel.email.observe(viewLifecycleOwner){
+			if(it.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(it).matches()){
+				binding.emailTextView.error = getString(R.string.email_field_empty)
+				binding.emailTextView.error = getString(R.string.email_invalid)
+				viewModel.canRegister = false
+				return@observe
+			}
+			viewModel.canRegister = true
+		}
+		viewModel.password.observe(viewLifecycleOwner){
+			if(it.isEmpty() || viewModel.confirmPassword.value == it){
+				binding.passwordEditText.error = getString(R.string.password_field_empty)
+				binding.confirmPasswordEditText.error = getString(R.string.passwords_not_match)
+				binding.passwordEditText.error = getString(R.string.passwords_not_match)
 
-	private fun checkUsernameExists(): Boolean {
-		//todo connect to api repository to check if username already exists. SignUpViewModel has to handle it
-		return true
-	}
+				viewModel.canRegister = false
+				return@observe
+			}
+			viewModel.canRegister = true
+		}
+		viewModel.confirmPassword.observe(viewLifecycleOwner){
+			if(viewModel.password.value == it){
+				binding.confirmPasswordEditText.error = getString(R.string.passwords_not_match)
+				binding.passwordEditText.error = getString(R.string.passwords_not_match)
 
-	private fun checkEmailExists(): Boolean{
-		//todo connect to api repository to check if email already exists. SignUpViewModel has to handle it
-		return true
+				viewModel.canRegister = false
+				return@observe
+			}
+
+			viewModel.canRegister = true
+		}
 	}
 
 }

@@ -1,7 +1,7 @@
-package com.selftutor.besafetogether.model.database.stopwords
+package com.selftutor.besafetogether.data.repository
 
-import androidx.lifecycle.LiveData
-import com.selftutor.besafetogether.model.database.SafeTogetherDb
+import com.selftutor.besafetogether.data.model.stopword.StopWord
+import com.selftutor.besafetogether.data.model.stopword.StopWordsDao
 
 class StopWordsRepository(private val dao: StopWordsDao) {
 

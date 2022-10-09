@@ -1,11 +1,10 @@
 package com.selftutor.besafetogether.screens.profile
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.selftutor.besafetogether.databinding.StopWordItemBinding
-import com.selftutor.besafetogether.model.database.stopwords.StopWord
+import com.selftutor.besafetogether.data.model.stopword.StopWord
 
 
 //todo Implement DiffUtils for better performance
