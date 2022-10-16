@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950473575685",
+    "project_id": "besafetogether",
+    "storage_bucket": "besafetogether.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950473575685:android:09fb3967fff8ae22f43b6c",
+        "android_client_info": {
+          "package_name": "com.selftutor.besafetogether"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950473575685-vtqnu0v0e06c7lefk7rqghfvhb4q4cld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD-bMCMIQRplrcp0Yu6QVLq0AE1QM1jfo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950473575685-vtqnu0v0e06c7lefk7rqghfvhb4q4cld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
