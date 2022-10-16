@@ -1,4 +1,4 @@
-package com.selftutor.besafetogether.data.model
+package com.selftutor.besafetogether.data.model.map
 
 import com.google.android.gms.maps.model.LatLng
 

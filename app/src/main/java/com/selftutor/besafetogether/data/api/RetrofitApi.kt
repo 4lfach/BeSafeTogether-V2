@@ -1,25 +1,24 @@
 package com.selftutor.besafetogether.data.api
 
+import com.selftutor.besafetogether.data.api.request.LoginRequest
+import com.selftutor.besafetogether.data.api.request.RegisterRequest
+import com.selftutor.besafetogether.data.api.response.DefaultResponse
 import com.selftutor.besafetogether.data.api.response.LoginResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
+import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RetrofitApi {
 
-    @FormUrlEncoded
-    @POST("login")
-    fun loginUser(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): LoginResponse
+    @POST("user/login")
+    suspend fun loginUser(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
-    @FormUrlEncoded
-    @POST("signup")
-    fun createUser(
-        @Field("username") username: String,
-        @Field("email") email: String,
-        @Field("phone") phone: String,
-        @Field("password") password: String,
-    )
+    @POST("user/register")
+    suspend fun registerUser(@Body registerRequest: RegisterRequest): Response<DefaultResponse>
+
+    companion object {
+        fun getApi(): RetrofitApi? {
+            return ApiClient.client?.create(RetrofitApi::class.java)
+        }
+    }
 }

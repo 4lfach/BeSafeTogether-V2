@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.selftutor.besafetogether.screens.profile.login.LoginViewModel" />
@@ -46,11 +47,14 @@
             app:layout_constraintTop_toBottomOf="@id/textView2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailTextView"
+                android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
+                android:afterTextChanged="@{viewModel::setEmail}"
+                android:drawableEnd="@drawable/ic_email"
                 android:text="@{viewModel.email}"
-                android:drawableEnd="@drawable/ic_email" />
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,9 +72,11 @@
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:afterTextChanged="@{viewModel::setPassword}"
+                android:drawableEnd="@drawable/ic_password"
                 android:inputType="textPassword"
                 android:text="@{viewModel.password}"
-                android:drawableEnd="@drawable/ic_password" />
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -78,14 +84,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/teal_200"
             android:drawableLeft="@drawable/ic_login"
             android:drawableTint="@color/white"
+            android:enabled="@{viewModel.loginEnabled}"
+            android:onClick="@{() -> viewModel.onLoginUser()}"
             android:paddingHorizontal="70dp"
             android:text="@string/log_in"
-            android:textSize="18sp"
             android:textAllCaps="false"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilPassword" />
@@ -94,11 +102,11 @@
             android:id="@+id/noAccountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_account"
             android:layout_marginTop="5dp"
+            android:text="@string/no_account"
             android:textSize="16sp"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintEnd_toStartOf="@id/createAccountTextView"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
@@ -108,10 +116,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:text="@string/sign_up"
+            android:text="@string/register"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/noAccountTextView"
             app:layout_constraintTop_toBottomOf="@id/loginButton" />
@@ -120,10 +128,10 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="gone"
-            android:indeterminateTint="@color/purple_200"
             android:layout_marginTop="20dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/purple_200"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/createAccountTextView" />

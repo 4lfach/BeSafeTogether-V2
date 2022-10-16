@@ -12,6 +12,7 @@ import com.selftutor.besafetogether.databinding.FragmentProfileBinding
 import com.selftutor.besafetogether.data.model.stopword.StopWord
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
+import com.selftutor.besafetogether.utils.SessionManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,13 +24,21 @@ class ProfileFragment : BaseFragment() {
 	private lateinit var adapter: StopWordsAdapter
 
 	//todo create User class with name, email, id
-	private var userId: Int = 0
+	private var userId: String = ""
 
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+
+		val token = SessionManager.getToken(requireContext())
+		if (token.isNullOrBlank()) {
+			navigate(R.id.action_profileFragment_to_loginFragment)
+		}
+	}
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 
 		binding = FragmentProfileBinding.inflate(inflater, container, false)
 		adapter = StopWordsAdapter(viewModel)

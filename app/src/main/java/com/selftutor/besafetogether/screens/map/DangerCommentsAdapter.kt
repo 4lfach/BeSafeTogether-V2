@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.DangerCommentItemBinding
-import com.selftutor.besafetogether.data.model.DangerComment
+import com.selftutor.besafetogether.data.model.map.DangerComment
 
 class DangerCommentsAdapter(
     private val dangerComments: List<DangerComment>

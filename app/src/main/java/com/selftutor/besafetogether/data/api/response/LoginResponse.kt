@@ -1,9 +1,10 @@
 package com.selftutor.besafetogether.data.api.response
 
-import com.selftutor.besafetogether.data.model.User
-import java.io.Serializable
+import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
-    val user: User,
-    val error: String
-): Serializable
+    @SerializedName("message")
+    var message: String,
+    @SerializedName("token")
+    var token: String
+)

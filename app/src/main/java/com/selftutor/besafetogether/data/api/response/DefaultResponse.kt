@@ -1,3 +1,7 @@
 package com.selftutor.besafetogether.data.api.response
 
-data class DefaultResponse(val error: String, val message: String)
+import com.google.gson.annotations.SerializedName
+
+data class DefaultResponse(
+    @SerializedName("error") val error: String?,
+    @SerializedName("message") val message: String)

@@ -22,7 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.DangerSpotSheetBinding
 import com.selftutor.besafetogether.databinding.FragmentMapBinding
-import com.selftutor.besafetogether.data.model.DangerPlace
+import com.selftutor.besafetogether.data.model.map.DangerPlace
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
 
@@ -71,10 +71,12 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             return
         }
 
-        addDangerPlaceMarkers(viewModel.places.value!!)
+        addDangerPlaceMarkers(viewModel.dangerPlaces.value!!)
+        addPolicePlaceMarkers(viewModel.policePlaces.value!!)
+        addDrugStorePlaceMarkers(viewModel.drugStorePlaces.value!!)
 
         mMap.setOnMarkerClickListener { marker ->
-            for (place in viewModel.places.value!!) {
+            for (place in viewModel.dangerPlaces.value!!) {
                 if(marker.position == place.latLng)
                     showDangerPlaceSheet(place)
             }
@@ -83,16 +85,31 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun addDangerPlaceMarkers(places: List<DangerPlace>) {
+        val latLngList = mutableListOf<LatLng>()
+        for(place in places){
+            latLngList.add(place.latLng)
+        }
+        addMarkers(latLngList, "Danger", 40, 40, R.drawable.warning)
+    }
+
+    private fun addPolicePlaceMarkers(places: List<LatLng>){
+        addMarkers(places, "Police", 40, 40, R.drawable.ic_police)
+    }
+
+    private fun addDrugStorePlaceMarkers(places: List<LatLng>){
+        addMarkers(places, "DrugStore", 40, 40, R.drawable.ic_drugstore)
+    }
+
+    private fun addMarkers(places:List<LatLng>, title: String, width: Int, height: Int, imageSrc: Int){
         for (place in places) {
             mMap.addMarker(
                 MarkerOptions()
-                    .title("Danger")
-                    .position(place.latLng)
+                    .title(title)
+                    .position(place)
                     .icon(
                         BitmapDescriptorFactory.fromBitmap(
                             resizeMapIcons(
-                                40,
-                                40
+                                width, height, imageSrc
                             )!!
                         )
                     )
@@ -121,10 +138,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         bottomSheetDialog.show()
     }
 
-    private fun resizeMapIcons(width: Int, height: Int): Bitmap? {
+    private fun resizeMapIcons(width: Int, height: Int, imageSrc: Int): Bitmap? {
         val imageBitmap = BitmapFactory.decodeResource(
             resources,
-            R.drawable.warning
+            imageSrc
         )
         return Bitmap.createScaledBitmap(imageBitmap, width, height, false)
     }

@@ -3,8 +3,6 @@ package com.selftutor.besafetogether
 import android.app.Application
 import com.selftutor.besafetogether.data.api.map.PlaceFaker
 import com.selftutor.besafetogether.data.SafeTogetherDb
-import com.selftutor.besafetogether.data.api.ApiHelper
-import com.selftutor.besafetogether.data.api.RetrofitBuilder
 import com.selftutor.besafetogether.data.repository.ContactsRepository
 import com.selftutor.besafetogether.data.repository.StopWordsRepository
 import com.selftutor.besafetogether.data.repository.UsersRepository
@@ -26,6 +24,6 @@ class App: Application(
 		stopWordsRepo = StopWordsRepository(database.getStopWordsDao())
 		contactsRepo = ContactsRepository(database.getContactsDao())
 
-		usersRepository = UsersRepository(ApiHelper(RetrofitBuilder.apiService))
+		usersRepository = UsersRepository()
 	}
 }

@@ -20,7 +20,7 @@ class HomeViewModel(contactsRepo: ContactsRepository,
 
     val stopWords: LiveData<List<StopWord>> = stopWordsRepo.getAllStopWords()
 
-    private var _scanButtonEnabled = MediatorLiveData<Boolean>()
+    private val _scanButtonEnabled = MediatorLiveData<Boolean>()
     val scanButtonEnabled : LiveData<Boolean> = _scanButtonEnabled
 
     init{

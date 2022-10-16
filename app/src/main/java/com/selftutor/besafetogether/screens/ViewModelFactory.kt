@@ -9,7 +9,7 @@ import com.selftutor.besafetogether.screens.map.MapViewModel
 import com.selftutor.besafetogether.screens.profile.ProfileViewModel
 import com.selftutor.besafetogether.screens.profile.contacts.ContactsViewModel
 import com.selftutor.besafetogether.screens.profile.login.LoginViewModel
-import com.selftutor.besafetogether.screens.profile.signup.SignupViewModel
+import com.selftutor.besafetogether.screens.profile.signup.RegisterViewModel
 
 class ViewModelFactory(
 	private val app: App
@@ -28,8 +28,8 @@ class ViewModelFactory(
 			HomeViewModel::class.java->{
 				HomeViewModel(app.contactsRepo, app.stopWordsRepo)
 			}
-			SignupViewModel::class.java->{
-				SignupViewModel()
+			RegisterViewModel::class.java->{
+				RegisterViewModel(app.usersRepository)
 			}
 			LoginViewModel::class.java->{
 				LoginViewModel(app.usersRepository)
@@ -42,4 +42,4 @@ class ViewModelFactory(
 	}
 }
 
-fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as App)
+fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as App)!!

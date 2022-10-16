@@ -2,7 +2,7 @@ package com.selftutor.besafetogether.data.api.map
 
 import com.github.javafaker.Faker
 import com.google.android.gms.maps.model.LatLng
-import com.selftutor.besafetogether.data.model.DangerComment
+import com.selftutor.besafetogether.data.model.map.DangerComment
 import com.selftutor.besafetogether.data.api.user.UserFaker
 import java.util.*
 

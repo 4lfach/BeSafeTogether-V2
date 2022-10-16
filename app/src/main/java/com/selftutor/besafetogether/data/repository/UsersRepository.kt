@@ -1,12 +1,20 @@
 package com.selftutor.besafetogether.data.repository
 
-import com.selftutor.besafetogether.data.api.ApiHelper
+import com.selftutor.besafetogether.data.api.RetrofitApi
+import com.selftutor.besafetogether.data.api.request.LoginRequest
+import com.selftutor.besafetogether.data.api.request.RegisterRequest
+import com.selftutor.besafetogether.data.api.response.DefaultResponse
+import com.selftutor.besafetogether.data.api.response.LoginResponse
+import retrofit2.Response
 
-class UsersRepository(private val apiHelper: ApiHelper) {
+class UsersRepository{
 
-    suspend fun login(email: String, password: String) = apiHelper.login(email, password)
+    suspend fun registerUser(request: RegisterRequest): Response<DefaultResponse>?{
+        return RetrofitApi.getApi()?.registerUser(registerRequest = request)
+    }
 
-    suspend fun signUp(username: String, email: String, phone: String, password: String) =
-        apiHelper.signUp(username, email, phone, password)
+    suspend fun loginUser(request: LoginRequest) : Response<LoginResponse>?{
+        return RetrofitApi.getApi()?.loginUser(loginRequest = request)
+    }
 }
 

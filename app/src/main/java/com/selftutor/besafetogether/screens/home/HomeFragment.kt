@@ -29,7 +29,6 @@ import com.selftutor.besafetogether.R
 import com.selftutor.besafetogether.databinding.FragmentHomeBinding
 import com.selftutor.besafetogether.screens.BaseFragment
 import com.selftutor.besafetogether.screens.factory
-import java.util.*
 
 
 class HomeFragment : BaseFragment(), RecognitionListener {
@@ -123,7 +122,6 @@ class HomeFragment : BaseFragment(), RecognitionListener {
 
     private fun checkPermissions(): Boolean {
         var counter = 0
-        var granted = false
         for (permission in permissions) {
             if (ActivityCompat.checkSelfPermission(
                     requireContext(),
@@ -182,10 +180,6 @@ class HomeFragment : BaseFragment(), RecognitionListener {
         Log.i(TAG, "destroy")
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     override fun onBeginningOfSpeech() {
         Log.i(TAG, "onBeginningOfSpeech")
         binding.progressBar.isIndeterminate = false
@@ -239,7 +233,7 @@ class HomeFragment : BaseFragment(), RecognitionListener {
                 }
             }
         } catch (e: Exception) {
-
+            showToast("Impossible to send message")
         }
     }
 

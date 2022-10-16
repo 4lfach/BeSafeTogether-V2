@@ -12,7 +12,7 @@
     <string name="welcome_back">Welcome Back</string>
     <string name="log_in_to_your_account">Log in to your account</string>
     <string name="no_account">Don\'t have an account?</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
     <string name="have_an_account">Already have an account?</string>
     <string name="log_in">Log in</string>
     <string name="email">Email</string>
@@ -70,6 +70,6 @@
     <string name="email_invalid">Email is invalid</string>
     <string name="email_already_exists">This email is already taken</string>
     <string name="passwords_not_match">Passwords do not match</string>
-    <string name="password_field_empty">Password field is empty\n</string>
+    <string name="password_field_empty">Password field is empty or\nMore than 6 characters required</string>
     <string name="unable_to_login">Unable to login</string>
 </resources>

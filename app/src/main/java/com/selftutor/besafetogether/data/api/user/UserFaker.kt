@@ -1,7 +1,7 @@
 package com.selftutor.besafetogether.data.api.user
 
 import com.github.javafaker.Faker
-import com.selftutor.besafetogether.data.model.User
+import com.selftutor.besafetogether.data.model.map.User
 
 class UserFaker {
 
@@ -13,7 +13,7 @@ class UserFaker {
         IMAGES.shuffle()
 
         val userList = (1..10).map{ User(
-            id = it,
+            id = "12312212312",
             profileLink = IMAGES[it % IMAGES.size],
             username = faker.funnyName().name(),
             email = faker.funnyName().name() + "gmail.com",
